@@ -71,6 +71,7 @@ function init() {
   debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
   world.SetDebugDraw(debugDraw);
 
+  // setup update function
   window.setInterval(update, 1000 / 60);
 
   //mouse
@@ -149,27 +150,26 @@ function init() {
     world.DrawDebugData();
     world.ClearForces();
   };
-
-  //helpers
-
-  //http://js-tut.aardon.de/js-tut/tutorial/position.html
-  function getElementPosition(element) {
-    var elem=element, tagname="", x=0, y=0;
-
-    while((typeof(elem) == "object") && (typeof(elem.tagName) != "undefined")) {
-      y += elem.offsetTop;
-      x += elem.offsetLeft;
-      tagname = elem.tagName.toUpperCase();
-
-      if(tagname == "BODY")
-        elem=0;
-
-      if(typeof(elem) == "object") {
-        if(typeof(elem.offsetParent) == "object")
-          elem = elem.offsetParent;
-      }
-    }
-
-    return {x: x, y: y};
-  }
 };
+
+//helpers
+//http://js-tut.aardon.de/js-tut/tutorial/position.html
+function getElementPosition(element) {
+  var elem=element, tagname="", x=0, y=0;
+
+  while((typeof(elem) == "object") && (typeof(elem.tagName) != "undefined")) {
+    y += elem.offsetTop;
+    x += elem.offsetLeft;
+    tagname = elem.tagName.toUpperCase();
+
+    if(tagname == "BODY")
+      elem=0;
+
+    if(typeof(elem) == "object") {
+      if(typeof(elem.offsetParent) == "object")
+        elem = elem.offsetParent;
+    }
+  }
+
+  return {x: x, y: y};
+}
