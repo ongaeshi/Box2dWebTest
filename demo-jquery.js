@@ -68,6 +68,18 @@ $(function(){
   }
 
   //------------------------------------------------------------------------------
+  function createCube(x, y, halfWidth, halfHeight) {
+    bodyDef.type = b2Body.b2_dynamicBody;
+    bodyDef.position.x = x;
+    bodyDef.position.y = y;
+
+    fixDef.shape = new b2PolygonShape;
+    fixDef.shape.SetAsBox(halfWidth, halfHeight);
+
+    world.CreateBody(bodyDef).CreateFixture(fixDef);
+  }
+
+  //------------------------------------------------------------------------------
   function setupDebugDraw() {
     var debugDraw = new b2DebugDraw();
     debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
@@ -87,7 +99,8 @@ $(function(){
 
   // bootstrap
   createGround();
-  createObjects();
+  // createObjects();
+  createCube(5.0, 1.0, 1.0, 0.5);
   setupDebugDraw();
   window.setInterval(update, 1000 / 60);
 });
